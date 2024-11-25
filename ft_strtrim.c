@@ -1,17 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: npezzati <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/23 10:36:29 by npezzati          #+#    #+#             */
-/*   Updated: 2024/11/23 10:36:32 by npezzati         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include <stdlib.h>
-#include <string.h>
+#include "libft.h"
+//#include <stdio.h>
+//#include <string.h>
 
 static int	ft_isset(char c, const char *set)
 {
@@ -24,28 +15,42 @@ static int	ft_isset(char c, const char *set)
 	return (0);
 }
 
-char	*ft_remove_set(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*result;
-	size_t	i;
-	size_t	j;
+	size_t	start;
+	size_t	end;
+	char	*trimmed;
 
 	if (!s1 || !set)
 		return (NULL);
-	result = (char *)malloc(ft_strlen(s1) + 1);
-	if (!result)
+	start = 0;
+	while (s1[start] && ft_isset(s1[start], set))
+		start++;
+	end = ft_strlen(s1);
+	while (end > start && ft_isset(s1[end - 1], set))
+		end--;
+	trimmed = (char *)malloc(sizeof(char) * (end - start + 1));
+	if (!trimmed)
 		return (NULL);
-	i = 0;
-	j = 0;
-	while (s1[i] != '\0')
-	{
-		if (ft_isset(s1[i], set))
-		{
-			result[j] = s1[i];
-			j++;
-		}
-		i++;
-	}
-	result[j] = '\0';
-	return (result);
+	ft_memcpy(trimmed, s1 + start, end - start);
+	trimmed[end - start] = '\0';
+	return (trimmed);
 }
+/*int main()
+{
+    char *s1 = "   Hello, world!   ";
+    char *set = "H ";
+    char *result = ft_strtrim(s1, set);
+
+    if (result)
+    {
+        printf("Stringa ritagliata: '%s'\n", result);
+        free(result);
+    }
+    else
+    {
+        printf("Errore durante l'allocazione\n");
+    }
+
+    return 0;
+}*/

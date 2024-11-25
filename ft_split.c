@@ -1,22 +1,17 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: npezzati <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/23 10:36:44 by npezzati          #+#    #+#             */
-/*   Updated: 2024/11/23 10:36:47 by npezzati         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-#include <stdlib.h>
 
-// Conta il numero di parole separate dal delimitatore `c`
+
+#include "libft.h"
+
+static void	free_all(char **arr, size_t i)
+{
+	while (i > 0)
+		free(arr[--i]);
+	free(arr);
+}
 static size_t	count_words(const char *s, char c)
 {
 	size_t	count;
 	int		in_word;
-
 	count = 0;
 	in_word = 0;
 	while (*s)
@@ -32,51 +27,13 @@ static size_t	count_words(const char *s, char c)
 	}
 	return (count);
 }
-
-// Libera tutta la memoria in caso di errore
-static void	free_all(char **arr, size_t i)
+static char	**craft(char const *s, char **result, char c, size_t word_count)
 {
-	while (i > 0)
-		free(arr[--i]);
-	free(arr);
-}
-
-// Copia una sottostringa di lunghezza `len` partendo da `start`
-static char	*copy_substring(const char *s, size_t start, size_t len)
-{
-	char	*substr;
 	size_t	i;
-
-	substr = (char *)malloc(sizeof(char) * (len + 1));
-	if (!substr)
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		substr[i] = s[start + i];
-		i++;
-	}
-	substr[i] = '\0';
-	return (substr);
-}
-
-// Divide la stringa in sottostringhe separate dal delimitatore `c`
-char	**ft_split(char const *s, char c)
-{
-	char	**result;
-	size_t	word_count;
-	size_t	start;
 	size_t	end;
-	size_t	i;
-
-	if (!s)
-		return (NULL);
-	word_count = count_words(s, c);
-	result = (char **)malloc(sizeof(char *) * (word_count + 1));
-	if (!result)
-		return (NULL);
-	i = 0;
+	size_t	start;
 	start = 0;
+	i = 0;
 	while (i < word_count)
 	{
 		while (s[start] == c)
@@ -84,7 +41,7 @@ char	**ft_split(char const *s, char c)
 		end = start;
 		while (s[end] && s[end] != c)
 			end++;
-		result[i] = copy_substring(s, start, end - start);
+		result[i] = ft_substr(s, start, end - start);
 		if (!result[i])
 		{
 			free_all(result, i);
@@ -93,6 +50,55 @@ char	**ft_split(char const *s, char c)
 		start = end;
 		i++;
 	}
-	result[i] = NULL;
+	result[i] = '\0';
 	return (result);
 }
+char	**ft_split(char const *s, char c)
+{
+	char	**result;
+	size_t	word_count;
+	if (!s)
+		return (NULL);
+	word_count = count_words(s, c);
+	result = (char *)malloc(sizeof(char *) * (word_count + 1));
+	if (!result)
+		return (NULL);
+	return (craft(s, result, c, word_count));
+}
+/*int	main(void)
+{
+	const char *str1 = "Ciao come va?";
+	char **result1 = ft_split(str1, ' ');
+	printf("Test 1: Separazione con spazio\n");
+	if (result1)
+	{
+		for (int i = 0; result1[i] != NULL; i++)
+			printf("Parola %d: '%s'\n", i + 1, result1[i]);
+		for (int i = 0; result1[i] != NULL; i++)
+			free(result1[i]);
+		free(result1);
+	}
+	else
+		printf("Errore nella separazione della stringa.\n");
+	return (0);
+}*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
