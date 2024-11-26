@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: npezzati <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/25 17:41:45 by npezzati          #+#    #+#             */
+/*   Updated: 2024/11/25 17:41:52 by npezzati         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 
@@ -6,10 +17,10 @@ char	*ft_strrchr(const char *s, int c)
 	int	len;
 
 	len = ft_strlen(s);
-	while (len > 0)
+	while (len >= 0)
 	{
 		if (s[len] == (char)c)
-			return ((char)s + len);
+			return ((char *)s + len);
 		len--;
 	}
 	return (NULL);

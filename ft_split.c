@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: npezzati <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/25 17:37:43 by npezzati          #+#    #+#             */
+/*   Updated: 2024/11/25 17:37:52 by npezzati         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 
@@ -8,10 +18,12 @@ static void	free_all(char **arr, size_t i)
 		free(arr[--i]);
 	free(arr);
 }
+
 static size_t	count_words(const char *s, char c)
 {
 	size_t	count;
 	int		in_word;
+
 	count = 0;
 	in_word = 0;
 	while (*s)
@@ -27,11 +39,13 @@ static size_t	count_words(const char *s, char c)
 	}
 	return (count);
 }
+
 static char	**craft(char const *s, char **result, char c, size_t word_count)
 {
 	size_t	i;
 	size_t	end;
 	size_t	start;
+
 	start = 0;
 	i = 0;
 	while (i < word_count)
@@ -50,17 +64,19 @@ static char	**craft(char const *s, char **result, char c, size_t word_count)
 		start = end;
 		i++;
 	}
-	result[i] = '\0';
+	result[i] = NULL;
 	return (result);
 }
+
 char	**ft_split(char const *s, char c)
 {
 	char	**result;
 	size_t	word_count;
+
 	if (!s)
 		return (NULL);
 	word_count = count_words(s, c);
-	result = (char *)malloc(sizeof(char *) * (word_count + 1));
+	result = (char **)malloc(sizeof(char *) * (word_count + 1));
 	if (!result)
 		return (NULL);
 	return (craft(s, result, c, word_count));
@@ -82,23 +98,3 @@ char	**ft_split(char const *s, char c)
 		printf("Errore nella separazione della stringa.\n");
 	return (0);
 }*/
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
