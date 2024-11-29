@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npezzati <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 15:42:26 by npezzati          #+#    #+#             */
-/*   Updated: 2024/11/26 15:42:30 by npezzati         ###   ########.fr       */
+/*   Created: 2024/11/27 10:16:09 by npezzati          #+#    #+#             */
+/*   Updated: 2024/11/27 10:16:14 by npezzati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-//#include <stdio.h>
-//#include <stdlib.h>
 
-t_list	*ft_lstnew(void *content)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	t_list	*new_node;
-
-	new_node = (t_list *)malloc(sizeof(t_list));
-	if (!new_node)
-		return (NULL);
-	new_node->content = content;
-	new_node->next = NULL;
-	return (new_node);
+	if (!lst || !new)
+		return ;
+	new->next = *lst;
+	*lst = new;
 }
-/*
-void ft_printlst(t_list *lst);
+/*void ft_printlst(t_list *lst)
 {
 	while(lst){
 		printf("%s ->", (char *)lst->content);
@@ -34,11 +27,17 @@ void ft_printlst(t_list *lst);
 		}
 	printf("NULL\n");
 }
-
 int main(){
-	char *s1 = "ciao";
-	t_list *nuova_lista = ft_lstnew(s1);
+	char *s3 = "ciao";
+	char *s1 = "hei";
+	char *s2= "tu";
+	t_list *head = ft_lstnew(s1);
+	t_list *node2 = ft_lstnew(s2);
+	t_list *node3 = ft_lstnew(s3);
 	
-	ft_printlst(nuova_lista);
+	head->next = node2;
+	ft_lstadd_back(&head, node3);
+	
+	ft_printlst(head);
 	return 0;
 }*/

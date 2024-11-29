@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npezzati <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 15:42:26 by npezzati          #+#    #+#             */
-/*   Updated: 2024/11/26 15:42:30 by npezzati         ###   ########.fr       */
+/*   Created: 2024/11/27 11:12:36 by npezzati          #+#    #+#             */
+/*   Updated: 2024/11/27 11:12:39 by npezzati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-//#include <stdio.h>
-//#include <stdlib.h>
 
-t_list	*ft_lstnew(void *content)
+t_list	*ft_lstlast(t_list *lst)
 {
-	t_list	*new_node;
-
-	new_node = (t_list *)malloc(sizeof(t_list));
-	if (!new_node)
+	if (!lst)
 		return (NULL);
-	new_node->content = content;
-	new_node->next = NULL;
-	return (new_node);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }
-/*
-void ft_printlst(t_list *lst);
+/*void ft_printlst(t_list *lst);
 {
 	while(lst){
 		printf("%s ->", (char *)lst->content);
@@ -35,10 +29,23 @@ void ft_printlst(t_list *lst);
 	printf("NULL\n");
 }
 
-int main(){
-	char *s1 = "ciao";
-	t_list *nuova_lista = ft_lstnew(s1);
-	
-	ft_printlst(nuova_lista);
-	return 0;
+int main() {
+    t_list *head = ft_lstnew("ciao");
+    t_list *node2 = ft_lstnew("sono");
+    t_list *node3 = ft_lstnew("shrek");
+    head->next = node2;
+    node2->next = node3;
+    
+    printf("Lista completa:\n");
+    ft_printlst(head);
+
+    t_list *last = ft_lstlast(head);
+
+    printf("\nUltimo nodo: %s\n", (char *)last->content);
+    
+    free(node3);
+    free(node2);
+    free(head);
+
+    return 0;
 }*/

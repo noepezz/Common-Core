@@ -1,44 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npezzati <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 15:42:26 by npezzati          #+#    #+#             */
-/*   Updated: 2024/11/26 15:42:30 by npezzati         ###   ########.fr       */
+/*   Created: 2024/11/27 13:42:08 by npezzati          #+#    #+#             */
+/*   Updated: 2024/11/27 13:42:10 by npezzati         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-//#include <stdio.h>
-//#include <stdlib.h>
 
-t_list	*ft_lstnew(void *content)
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	t_list	*new_node;
+	t_list	*tmp;
 
-	new_node = (t_list *)malloc(sizeof(t_list));
-	if (!new_node)
-		return (NULL);
-	new_node->content = content;
-	new_node->next = NULL;
-	return (new_node);
+	if (!lst || !del)
+		return ;
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		del((*lst)->content);
+		free(*lst);
+		*lst = tmp;
+	}
+	*lst = NULL;
 }
-/*
-void ft_printlst(t_list *lst);
+/*void del_c(void *content){
+	free(content);
+}
+void ft_printlst(t_list *lst)
 {
 	while(lst){
 		printf("%s ->", (char *)lst->content);
 		lst = lst->next;
-		}
+	}
 	printf("NULL\n");
 }
-
 int main(){
-	char *s1 = "ciao";
-	t_list *nuova_lista = ft_lstnew(s1);
+	char *s3 = "ciao";
+	char *s1 = "hei";
+	char *s2= "tu";
+	t_list *head = ft_lstnew(s1);
+	t_list *node2 = ft_lstnew(s2);
+	t_list *node3 = ft_lstnew(s3);
 	
-	ft_printlst(nuova_lista);
+	head->next = node2;
+	node2->next = node3;
+	
+	ft_lstclear(&head, del_c);	
+	ft_printlst(head);
 	return 0;
 }*/

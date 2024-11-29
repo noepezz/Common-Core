@@ -28,7 +28,7 @@ char	*ft_strchr(const char *s, int c)
 /*
 int	main(void)
 {
-	const char	*str = "sono molto stanca";
+	const char	*str = "adesso sono stressata";
 	char	c1 = 'o';
 	char	c2 = 's';
 	char	c3 = 'g';

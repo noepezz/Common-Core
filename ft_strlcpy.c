@@ -32,7 +32,7 @@ size_t	ft_strlcpy(char *dst, char *src, size_t size)
 /*
 int	main(void)
 {
-	char	src[] = "Sono molto stanca";
+	char	src[] = "Ninonino";
 	char	dest[21];
 	char	sdest[7];
 	

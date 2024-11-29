@@ -89,12 +89,12 @@ char	**ft_split(char const *s, char c)
 	if (result1)
 	{
 		for (int i = 0; result1[i] != NULL; i++)
-			printf("Parola %d: '%s'\n", i + 1, result1[i]);
+			printf("Risultato %d: '%s'\n", i + 1, result1[i]);
 		for (int i = 0; result1[i] != NULL; i++)
 			free(result1[i]);
 		free(result1);
 	}
 	else
-		printf("Errore nella separazione della stringa.\n");
+		printf("Errore nella separazione.\n");
 	return (0);
 }*/

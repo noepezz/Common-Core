@@ -6,7 +6,7 @@
 #    By: npezzati <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 18:06:56 by npezzati          #+#    #+#              #
-#    Updated: 2024/11/26 14:42:24 by npezzati         ###   ########.fr        #
+#    Updated: 2024/11/29 10:07:02 by npezzati         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,13 @@ SRC = \
 	ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c \
 	ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_calloc.c ft_strdup.c
 
-#genera il nome dei file oggetto (.o) a partire ai file sorgente (.c)
+BONUS_SRC = \
+	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c \
+	ft_lstclear.c ft_lstiter.c ft_lstmap.c
+
 OBJ = $(SRC:.c=.o)
 
+BONUS_OBJ = $(BONUS_SRC:.c=.o)
 #regola principale per creare la libreria
 all: $(NAME)
 
@@ -37,15 +41,15 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	ar rc $@ $?
 
-#compilazione dei file sorgente
+bonus: $(BONUS_OBJ)
+	ar rc $(NAME) $?
+
 %.o: %.c
 	$(CC) $(CFLAGS) -c $?
 
-#pulizia dei file oggetto
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJ) $(BONUS_OBJ)
 
-#rimozione di file oggetto e libreria
 fclean: clean
 	rm -f $(NAME)
 

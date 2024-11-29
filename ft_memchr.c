@@ -39,7 +39,7 @@ int main(void)
 	if (result != NULL)
 		printf("Trovato '%c' in posizione: %ld\n", c, (char *)result - data);
 	else
-		printf("Il carattere '%c' non è stato trovato.\n", c);
+		printf("Il carattere '%c' non trovato.\n", c);
 
 	return 0;
 }*/
