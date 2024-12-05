@@ -21,6 +21,8 @@ SRC = \
 	ft_puthex.c   ft_putptr.c	ft_putunsigned.c
 OBJ = $(SRC:.c=.o)
 
+all: $(NAME)
+
 $(NAME): $(OBJ)
 	ar rc $@ $?
 %.o: %.c
